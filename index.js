@@ -304,6 +304,14 @@ app.get(BASE_URL_API + "/cholera-stats", (req, res) => {
             whoRegion: req.body.whoRegion
         };
 
+        
+        if(cholera_stats_array[index].country !== req.body.country 
+        || cholera_stats_array[index].year !== req.body.year){
+                return res.sendStatus(401,"UNAUTHORIZED");
+        }
+
+        //jdscknsldckn
+
         cholera_stats_array[index]= actualizado;
         res.sendStatus(200);
 
