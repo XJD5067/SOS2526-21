@@ -108,7 +108,7 @@ app.put(BASE_URL_API + '/aids-deaths-stats/:codecountry/:year', (req, res) => {
         !req.body.death_count_hiv_aids_50_69){
             return res.sendStatus(400,"BAD REQUEST");
         }
-    if(arrayMuertes[index].country !== req.body.country || arrayMuertes[index].codecountry !== req.body.codecountry || arrayMuertes[index].codecountry !== req.body.year){
+    if(arrayMuertes[index].country !== req.body.country || arrayMuertes[index].codecountry !== req.body.codecountry || arrayMuertes[index].year !== req.body.year){
         return res.sendStatus(401,"UNAUTHORIZED")
     }
     arrayMuertes[index] = req.body;
