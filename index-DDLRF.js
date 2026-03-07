@@ -102,7 +102,7 @@ let myObject10 = {
     death_count_hiv_aids_50_69:"13"
 }
 
-ejemploDatos = [myObject1,myObject2,myObject3,myObject4,myObject5,myObject6,myObject7,myObject8,myObject9,myObject10];
+let ejemploDatos = [myObject1,myObject2,myObject3,myObject4,myObject5,myObject6,myObject7,myObject8,myObject9,myObject10];
 
 
 function calcularMediaMenores14(datos, codigoPais) {
@@ -113,4 +113,4 @@ function calcularMediaMenores14(datos, codigoPais) {
 
 //console.log(calcularMediaMenores14(ejemploDatos, "AFG"));
 
-module.exports = {ejemploDatos, calcularMediaMenores14}
+export {ejemploDatos, calcularMediaMenores14}

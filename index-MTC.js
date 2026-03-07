@@ -1,6 +1,6 @@
 let cholera_stats = [
 
-    fila1={
+    {
         country: "afganistan", 
         year: 2016,
         number_of_reported_cases_of_cholera: 677,
@@ -9,7 +9,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila2={
+    {
         country: "afganistan", 
         year: 2015,
         number_of_reported_cases_of_cholera: 58064,
@@ -18,7 +18,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila3={
+    {
         country: "afganistan", 
         year: 2014,
         number_of_reported_cases_of_cholera: 45481,
@@ -27,7 +27,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila4={
+    {
         country: "afganistan", 
         year: 2013,
         number_of_reported_cases_of_cholera: 3957,
@@ -36,7 +36,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila5={
+    {
         country: "afganistan", 
         year: 2012,
         number_of_reported_cases_of_cholera: 12,
@@ -45,7 +45,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila6={
+    {
         country: "afganistan", 
         year: 2011,
         number_of_reported_cases_of_cholera: 3733,
@@ -54,7 +54,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila7={
+    {
         country: "afganistan", 
         year: 2010,
         number_of_reported_cases_of_cholera: 2369,
@@ -63,7 +63,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila8={
+    {
         country: "afganistan", 
         year: 2009,
         number_of_reported_cases_of_cholera: 662,
@@ -72,7 +72,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila9={
+    {
         country: "afganistan", 
         year: 2008,
         number_of_reported_cases_of_cholera: 4384,
@@ -81,7 +81,7 @@ let cholera_stats = [
         region: "eastern mediterranean"
     },
 
-    fila10={
+    {
         country: "afganistan", 
         year: 2005,
         number_of_reported_cases_of_cholera: 33,
@@ -122,4 +122,4 @@ function media_muertes_colera_pais_despues_del_año(datos, pais, año){
 
 
 
-module.exports = {cholera_stats, media_muertes_colera_pais_despues_del_año};
+export {cholera_stats, media_muertes_colera_pais_despues_del_año};
