@@ -193,7 +193,7 @@ app.get(BASE_URL_API + "/cholera-stats", (req, res) => {
         
         if(cholera_stats_array[index].country !== req.body.country 
         || cholera_stats_array[index].year !== req.body.year){
-                return res.sendStatus(401,"UNAUTHORIZED");
+                return res.sendStatus(400,"UNAUTHORIZED");
         }
 
         //jdscknsldckn
