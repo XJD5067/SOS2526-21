@@ -8,6 +8,7 @@
     "test-api-online": "npx newman run tests/api/api-tests.json -e tests/api/api-test-env-render.json",
     "test-local":"start-server-and-test http://localhost:3000 test-api-local",
     "test-online":"start-server-and-test https://sos2526-21.onrender.com test-api-online",
+    "test":"npm run test-api-local",
     "start": "node index.js"
   },
   "repository": {
