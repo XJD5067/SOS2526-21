@@ -5,6 +5,7 @@ import csv from 'csv-parser'
 
 
 import {loadBackendApiDDLRF} from './src/backend/backApiDDLRF.js'
+import { loadBackendApiIAD } from './src/backend/backApiIAD.js'
 
 const app = express();
 app.use(bodyParser.json())
