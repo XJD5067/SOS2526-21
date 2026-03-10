@@ -231,6 +231,13 @@ app.get(BASE_URL_API + "/cholera-stats", (req, res) => {
 
 let array_creencias=[]
 
+//Redirect to POSTMAN Documentation
+
+app.get(BASE_URL_API+"/religious-believes-stats/docs",(req,res)=>{
+    res.redirect("https://documenter.getpostman.com/view/52385252/2sBXierDsV");
+    
+});
+
 
 //GET
 app.get(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
