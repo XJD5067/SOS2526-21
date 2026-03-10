@@ -9,7 +9,9 @@
     "test-local":"start-server-and-test http://localhost:3000 test-api-local",
     "test-online":"start-server-and-test https://sos2526-21.onrender.com test-api-online",
     "test":"npm run test-api-online",
-    "start": "node index.js"
+    "start": "node index.js",
+
+    "test-religious-believes-stats":"npx newman run tests/api/test-religious-believes-stats.json -e tests/api/api-test-env-local.json"
   },
   "repository": {
     "type": "git",
