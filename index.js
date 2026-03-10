@@ -228,17 +228,10 @@ app.get(BASE_URL_API + "/cholera-stats", (req, res) => {
 
 let array_creencias=[]
 
-import {average_percent_religion_country} from "./index-IAD.js"
 
-//SAMPLE
-app.get(BASE_URL_SAMPLES+"/IAD",(req,res)=>{
-    let datos=average_percent_religion_country("jews","africa");
 
-    res.json({
-        mensaje:"Porcentaje medio de judíos en africa (país)",
-        resultado:datos
-    });
-});
+
+
 
 //GET
 app.get(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
