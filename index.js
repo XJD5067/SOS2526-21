@@ -355,6 +355,7 @@ app.delete(BASE_URL_API+"/religious-believes-stats/:entity/:year",(req,res)=>{
         return res.sendStatus(404);
     }
     array_creencias.splice(index,1);
+    res.sendStatus(200);
     
 })
 
