@@ -4,7 +4,7 @@ import dataStore from 'nedb';
 let db = new dataStore();
 let BASE_URL_API = "/api/v1";
 
-export function backApiMTCS(app){
+export function loadBackendApiMTC(app){
 
     let cholera_stats_array=[];
     

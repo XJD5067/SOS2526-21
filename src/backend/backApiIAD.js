@@ -6,7 +6,7 @@ let db = new dataStore();
 let BASE_URL_API = "/api/v1";
 
 
-function loadBackendApiIAD(app){
+export function loadBackendApiIAD(app){
 
 let array_creencias=[]
 db.insert(array_creencias);
