@@ -3,16 +3,19 @@ import csv from 'csv-parser';
 import dataStore from 'nedb';
 let db = new dataStore({ filename: './data/db/cholera-stats.db', autoload: true });
 let BASE_URL_API = "/api/v1";
-let DOCS_URL= "";
+let DOCS_URL= "https://documenter.getpostman.com/view/52370283/2sBXiesZo6";
 
 export function loadBackendApiMTC(app){
 
     let cholera_stats_array=[];
     
+        
+    //Redirect to POSTMAN Doc
 
-    app.get(BASE_URL_API + "/cholera-stats/docs", (res, req)=>{
+    app.get(BASE_URL_API+"/cholera-stats/docs",(req,res)=>{
         res.redirect(DOCS_URL);
-    })
+        
+    });
 
 
     app.get(BASE_URL_API + "/cholera-stats/loadInitialData", (req, res) => {
