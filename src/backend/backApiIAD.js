@@ -2,7 +2,7 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import dataStore from 'nedb';
-let db = new dataStore();
+let db = new dataStore({filename: './data/db/religious-believes-stats.db', autoload: true});
 let BASE_URL_API = "/api/v1";
 
 
