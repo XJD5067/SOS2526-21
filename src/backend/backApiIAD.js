@@ -39,22 +39,24 @@ app.get(BASE_URL_API+"/religious-believes-stats/loadInitialData",(req,res)=>{
     db.find({},(err,data)=>{
         if(err) return res.sendStatus(500);
         if(data.length>0) return res.sendStatus(409);
+
+        let number_of_rows = 0;
+        const csv_datos = [];
+        fs.createReadStream('./data/share-of-population-by-religious-affiliation.csv')
+            .pipe(csv()) 
+            .on('data', (row) => {
+                if (number_of_rows < 10) {
+                    csv_datos.push(row);  
+                    number_of_rows++;
+                }
+            })
+            .on('end', () => { 
+                db.insert(csv_datos);
+                res.sendStatus(201, "CREATED");
+            });
     })
 
-    let number_of_rows = 0;
-    const csv_datos = [];
-    fs.createReadStream('./data/share-of-population-by-religious-affiliation.csv')
-        .pipe(csv()) 
-        .on('data', (row) => {
-            if (number_of_rows < 10) {
-                csv_datos.push(row);  
-                number_of_rows++;
-            }
-        })
-        .on('end', () => { 
-            db.insert(csv_datos);
-            res.sendStatus(201, "CREATED");
-        });
+    
 
 }
 );
@@ -71,10 +73,11 @@ app.post(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
     db.find({entity:req.body.entity,year:req.body.year},(err,dato)=>{
 
         if(dato.length>0) return res.sendStatus(409);
+        db.insert(req.body);
+        res.sendStatus(201);
     })
     
-    db.insert(req.body);
-    res.sendStatus(201);
+    
 });
 
 //FORBIDDEN POST (¿Utilidad de definir esto?)
@@ -102,11 +105,12 @@ app.put(BASE_URL_API+"/religious-believes-stats/:entity/:year",(req,res)=>{
 
     db.update({entity:req.params.entity,year:req.params.year}, {$set:req.body},(err,data)=>{
         if(err) return res.sendStatus(500);
-        if(data.length===0) return res.sendStatus(404);
+        if(data===0) return res.sendStatus(404);
+        res.sendStatus(200);
     })
     
     
-    res.sendStatus(200);
+    
 });
 
 
@@ -137,19 +141,21 @@ app.delete(BASE_URL_API+"/religious-believes-stats/:entity/:year",(req,res)=>{
     
     db.remove({entity:req.params.entity,year:req.params.year},(err,num)=>{
         if(num===0) return res.sendStatus(404);
+        res.sendStatus(200);
     })
 
-    res.sendStatus(200);
+    
     
 })
 
 //ANNIHILATE DATA
 
 app.delete(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
-    db.remove({},(err,num)=>{
+    db.remove({},{multi:true},(err,num)=>{
         console.log(`${num} elements removed`);
+        res.sendStatus(200);
     })
-    res.sendStatus(200);
+    
 })
 
 }
