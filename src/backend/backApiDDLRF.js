@@ -1,12 +1,16 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import dataStore from 'nedb';
-let db = new dataStore();
+let db = new dataStore({ filename: './data/db/aids-deaths-stats.db', autoload: true });
 let BASE_URL_API = "/api/v1";
-
+let DOC_URL = "https://documenter.getpostman.com/view/52383803/2sBXiesEAR";
 
 
 export function loadBackendApiDDLRF(app){
+    app.get(BASE_URL_API+'/aids-deaths-stats/docs', (req, res) => {
+        res.redirect(DOC_URL)
+    })
+
     let arrayMuertes = [];
     db.insert(arrayMuertes);
 
@@ -32,6 +36,33 @@ export function loadBackendApiDDLRF(app){
                 muertes = muertes.filter(d => d.year >= from && d.year <= to);
             }
 
+            if(req.query.country){
+                muertes = muertes.filter(d => d.country === req.query.country)
+            }
+
+            if(req.query.death_count_hiv_aids_under_5){
+                muertes = muertes.filter(d => d.death_count_hiv_aids_under_5 === parseInt(req.query.death_count_hiv_aids_under_5, 10))
+            }
+            
+            if(req.query.death_count_hiv_aids_70_plus){
+                muertes = muertes.filter(d => d.death_count_hiv_aids_70_plus === parseInt(req.query.death_count_hiv_aids_70_plus, 10))
+            }
+            
+            if(req.query.death_count_hiv_aids_5_14){
+                muertes = muertes.filter(d => d.death_count_hiv_aids_5_14 === parseInt(req.query.death_count_hiv_aids_5_14, 10))
+            }
+            
+            if(req.query.death_count_hiv_aids_15_49){
+                muertes = muertes.filter(d => d.death_count_hiv_aids_15_49 === parseInt(req.query.death_count_hiv_aids_15_49, 10))
+            }
+
+            if(req.query.death_count_hiv_aids_50_69){
+                muertes = muertes.filter(d => d.death_count_hiv_aids_50_69 === parseInt(req.query.death_count_hiv_aids_50_69, 10))
+            }
+
+            const limit = parseInt(req.query.limit) || 10;
+            const offset = parseInt(req.query.offset) || 0;
+            muertes = muertes.slice(offset, offset + limit);
             res.status(200, "OK").send(JSON.stringify(muertes)); 
         });
 
@@ -144,7 +175,7 @@ export function loadBackendApiDDLRF(app){
             if(err) return res.sendStatus(500);
             if(muerte.length == 0) return res.sendStatus(404, "NOT FOUND")
             muerte = muerte.map((c) => { delete c._id; return c });
-            res.status(200, "OK").send(JSON.stringify(muerte)); 
+            res.status(200, "OK").send(JSON.stringify(muerte[0])); 
         });
     });
 

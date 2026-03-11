@@ -17,10 +17,9 @@ let PORT = process.env.PORT || 3000;
 let BASE_URL_API = "/api/v1";
 
 app.use('/about', express.static('./static/about.html'))
+app.use('/', express.static('./static'))
 
-app.get('',(req,res)=>{
-    res.sendFile('./static/presentacion.html',{root:'./'});
-})
+
 
 
 //AQUI SE PUEDE PONER LAS TAREAS PERSONALES 
