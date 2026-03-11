@@ -37,8 +37,8 @@ app.get(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
 app.get(BASE_URL_API+"/religious-believes-stats/loadInitialData",(req,res)=>{
    
     db.find({},(err,data)=>{
-        if(err) res.sendStatus(500);
-        if(data.length>0) res.sendStatus(409);
+        if(err) return res.sendStatus(500);
+        if(data.length>0) return res.sendStatus(409);
     })
 
     let number_of_rows = 0;
@@ -101,8 +101,8 @@ app.put(BASE_URL_API+"/religious-believes-stats/:entity/:year",(req,res)=>{
 
 
     db.update({entity:req.params.entity,year:req.params.year}, {$set:req.body},(err,data)=>{
-        if(err) res.sendStatus(500);
-        if(data.length===0) res.sendStatus(404);
+        if(err) return res.sendStatus(500);
+        if(data.length===0) return res.sendStatus(404);
     })
     
     
