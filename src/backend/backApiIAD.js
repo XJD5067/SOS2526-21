@@ -21,10 +21,21 @@ app.get(BASE_URL_API+"/religious-believes-stats/docs",(req,res)=>{
 
 //GET
 app.get(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
-    db.find(req.query,(err,creencias)=>{
+
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = parseInt(req.query.offset) || 0;
+
+    filtro=req.query;
+    delete filtro.limit;
+    delete filtro.offset;
+
+    db.find(filtro,(err,creencias)=>{
         let datos=creencias.map(element=> {
             delete element._id;
             return element;});
+        
+            
+            datos = datos.slice(offset, offset + limit);
 
         res.status(200).send(JSON.stringify(datos, null, 2));
 
