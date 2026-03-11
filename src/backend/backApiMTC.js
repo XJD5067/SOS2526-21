@@ -10,7 +10,7 @@ export function loadBackendApiMTC(app){
     let cholera_stats_array=[];
     
         
-    //Redirect to POSTMAN Doc
+    //Redirect POSTMAN Doc
 
     app.get(BASE_URL_API+"/cholera-stats/docs",(req,res)=>{
         res.redirect(DOCS_URL);
