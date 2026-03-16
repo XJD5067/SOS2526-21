@@ -31,6 +31,7 @@ app.get(BASE_URL_API+"/religious-believes-stats",(req,res)=>{
 
     db.find(filtro,(err,creencias)=>{
         if(err) res.sendStatus(500);
+        if(creencias.length===0) res.sendStatus(404);
         let datos=creencias.map(element=> {
             delete element._id;
             return element;});
