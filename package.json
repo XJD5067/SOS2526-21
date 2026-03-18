@@ -12,7 +12,9 @@
     "start": "node index.js",
     "test-religious-believes-stats": "npx newman run tests/api/test-religious-believes-stats.json -e tests/api/api-test-env-local.json",
     "test-aids-deaths-stats": "npx newman run tests/api/test-aids-deaths-stats.json -e tests/api/api-ddlrf-env-local.json",
-    "test-cholera-stats": "npx newman run tests/api/test-cholera-stats.json -e tests/api/api-test-env-local.json"
+    "test-cholera-stats": "npx newman run tests/api/test-cholera-stats.json -e tests/api/api-test-env-local.json",
+    "build": "cd src/frontend && npm run build",
+    "dev-front": "cd src/frontend && npm run dev -- --open"
   },
   "repository": {
     "type": "git",
@@ -27,11 +29,13 @@
   "homepage": "https://github.com/gti-sos/SOS2526-21#readme",
   "dependencies": {
     "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
     "csv-parser": "^3.2.0",
     "express": "^5.2.1",
     "nedb": "^1.8.0"
   },
   "devDependencies": {
+    "@sveltejs/adapter-node": "^5.5.4",
     "start-server-and-test": "^2.1.5"
   }
 }
