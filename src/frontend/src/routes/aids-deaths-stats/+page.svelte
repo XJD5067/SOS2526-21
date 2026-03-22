@@ -24,7 +24,17 @@
         "404": "El recurso no existe",
         "400": "Incompatibilidad en los datos enviados"
     }
-	let filtro = "";
+
+	let limit = $state(10);
+	let offset = $state(0);
+
+	let filtro = $state("");
+	
+	function aplicarFiltro() {
+    	filtro = limit != 10 ? `?limit=${limit}` : '';
+    	getDatos();
+	}
+
 
 	if (dev) {
 		BASE_API = 'http://localhost:3000' + BASE_API;
@@ -156,6 +166,16 @@
 
 <button onclick={deleteContacts}>ELIMINAR TODO</button>
 
+<h3>Filtros: </h3>
+<div class="card-limit">
+  <h2>Número de datos: </h2>
+  <input type="number" bind:value={limit} min="1"/>
+</div>
+<div class="card-offset">
+  <h2>Número de datos: </h2>
+  <input type="number" bind:value={offset} min="0"/>
+</div>
+<button onclick={aplicarFiltro}>Aplicar</button>
 <style>
 	td,
 	th {
