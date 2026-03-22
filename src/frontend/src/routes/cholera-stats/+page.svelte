@@ -102,31 +102,57 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
 
 <h1>Estadísticas del cólera</h1>  
 
+
 {#if resultStatus == 200 || resultStatus == 201}
-<h3>Status code: {resultStatus}</h3>
-<h3>Operación realizada con éxito</h3>
-{/if}
-{#if resultStatus == 409}
-<h3>Status code: {resultStatus}</h3>
-<h3>La estadística ya existe</h3>
+<div class="alert success">
+  <strong>Status {resultStatus}</strong> — Operación realizada con éxito
+</div>
 {/if}
 {#if resultStatus == 400}
-<h3>Status code: {resultStatus}</h3>
-<h3>No se puede modificar el pais o el año</h3>
+<div class="alert error">
+  <strong>Status {resultStatus}</strong> — Campos sin rellenar
+</div>
 {/if}
-{#if resultStatus == 404}
-<h3>Status code: {resultStatus}</h3>
-<h3>No existe la extadística del pais: y año: </h3>
+{#if resultStatus == 409}
+<div class="alert error">
+  <strong>Status {resultStatus}</strong> — La estadística ya existe
+</div>
 {/if}
 
+<style>
+  .alert {
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+  .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+</style>
+
+<h5>Haga click en el país para actualizar datos de la estadística</h5>
+
+<br>
+
+<button onclick={deleteCholeraStats}>BORRAR TODO</button>
+
+<br>
+<br>
+<br>
 
 
-<button onclick={deleteCholeraStats}>Borrar todo</button>
 <table>
     <thead>
         <tr>
             <th>Pais</th>
-            <th>año</th>
+            <th>Año</th>
             <th>Casos reportados</th>
             <th>Muertes reportadas</th>
             <th>Ratio de fatalidad</th>
@@ -136,13 +162,13 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
     </thead>
     <tbody>
         <tr>
-            <td><input bind:value= {newCountry} /></td>
-            <td><input bind:value= {newYear} /></td>
-            <td><input bind:value= {newReportedCases} /></td>
-            <td><input bind:value= {newReportedDeaths} /></td>
-            <td><input bind:value= {newFatalityRates} /></td>
-            <td><input bind:value= {newWhoRegion} /></td>
-            <td><button onclick={InsertCholeraStat}>Insertar</button></td>
+            <td><input type="number" bind:value= {newCountry} /></td>
+            <td><input type="number" bind:value= {newYear} /></td>
+            <td><input type="number" bind:value= {newReportedCases} /></td>
+            <td><input type="number" bind:value= {newReportedDeaths} /></td>
+            <td><input type="number" bind:value= {newFatalityRates} /></td>
+            <td><input type="number" bind:value= {newWhoRegion} /></td>
+            <td><button onclick={InsertCholeraStat}>INSERTAR</button></td>
         </tr>
         {#each cholera_stats as cholera_stat (`${cholera_stat.country}-${cholera_stat.year}`)}
             <tr>
@@ -152,7 +178,7 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
                 <td> {cholera_stat.reportedDeaths} </td>
                 <td>{cholera_stat.fatalityRate} </td>
                 <td>{cholera_stat.whoRegion}</td>
-                <td><button onclick={() => deleteCholeraStat(cholera_stat.country, cholera_stat.year)}>Borrar</button></td>
+                <td><button onclick={() => deleteCholeraStat(cholera_stat.country, cholera_stat.year)}>BORRAR</button></td>
              </tr>
 
         {/each}

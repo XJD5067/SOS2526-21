@@ -1,7 +1,3 @@
-
-<p>Detalles de la estadistica de colera: {country}</p> 
-
-
 <script>
 
 import {page} from '$app/state';
@@ -71,24 +67,43 @@ onMount(async () =>  {getCholeraStat(); }); //que se carga al iniciar la pagina
 
 </script>
 
-<h1>cholera-stats</h1>  
+
+<h1>Detalles de la estadistica de colera del pais <u>{country}</u> en el año <u>{year}</u> </h1> 
 
 {#if resultStatus == 200 || resultStatus == 201}
-<h3>Status code: {resultStatus}</h3>
-<h3>Operación realizada con éxito</h3>
-{/if}
-{#if resultStatus == 409}
-<h3>Status code: {resultStatus}</h3>
-<h3>La estadística ya existe</h3>
+<div class="alert success">
+  <strong>Status {resultStatus}</strong> — Operación realizada con éxito
+</div>
 {/if}
 {#if resultStatus == 400}
-<h3>Status code: {resultStatus}</h3>
-<h3>No se puede modificar el pais o el año</h3>
+<div class="alert error">
+  <strong>Status {resultStatus}</strong> — Campos sin rellenar
+</div>
 {/if}
 {#if resultStatus == 404}
-<h3>Status code: {resultStatus}</h3>
-<h3>No existe la extadística del pais:{country} y año: {year}</h3>
+<div class="alert error">
+  <strong>Status {resultStatus}</strong> — No existe la estadística del país {country} y año {year}
+</div>
 {/if}
+
+<style>
+  .alert {
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin: 10px 0;
+  }
+  .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+</style>
+
 
 
 <table>
@@ -105,14 +120,13 @@ onMount(async () =>  {getCholeraStat(); }); //que se carga al iniciar la pagina
     </thead>
     <tbody>
         <tr>
-            <td><input bind:value= {updatedCountry} /></td>
-            <td><input  bind:value= {updatedYear} /></td>
-            <td><input  bind:value= {updatedReportedCases} /></td>
-            <td><input  bind:value= {updatedReportedDeaths} /></td>
-            <td><input  bind:value= {updatedFatalityRates} /></td>
+            <td><input bind:value= {updatedCountry} disabled/></td>
+            <td><input type="number" bind:value= {updatedYear} disabled/></td>
+            <td><input type="number" bind:value= {updatedReportedCases} /></td>
+            <td><input type="number" bind:value= {updatedReportedDeaths} /></td>
+            <td><input type="number" bind:value= {updatedFatalityRates} /></td>
             <td><input  bind:value= {updatedWhoRegion} /></td>
-            <td><button onclick={UpdateCholeraStat}>Actualizar
-            </button></td>
+            <td><button onclick={UpdateCholeraStat}>ACTUALIZAR</button></td>
         </tr>
     </tbody>
 
