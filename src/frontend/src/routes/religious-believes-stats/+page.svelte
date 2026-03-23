@@ -167,7 +167,6 @@
 {#if codigo_status!=0}
     <div>
         <h2>Estado de la operación</h2>
-        <p>El código de estado es {codigo_status}</p>
         <p>{estados_explicacion[codigo_status.toString()]}</p>
         
     </div>
