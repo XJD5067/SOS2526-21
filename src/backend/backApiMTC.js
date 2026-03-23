@@ -201,10 +201,10 @@ export function loadBackendApiMTC(app){
 
         app.put(BASE_URL_API + "/cholera-stats/:country/:year", (req, res) =>{
             //por que al cargar los datos parseados de backend si hay un 0 lo detecta como campo vacio.
-            if(req.body.country === undefined || req.body.year === undefined || 
-            req.body.reportedCases === undefined || req.body.reportedDeaths === undefined ||
-             req.body.fatalityRate === undefined || req.body.whoRegion === undefined
-            ){
+            if(req.body.country == null || req.body.year == null ||
+            req.body.reportedCases == null || req.body.reportedDeaths == null ||
+              req.body.fatalityRate == null || req.body.whoRegion == null)
+            {
                 return res.status(400).send(JSON.stringify("Missing fields", null, 2));
             }
 
