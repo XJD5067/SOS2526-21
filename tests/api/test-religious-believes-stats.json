@@ -299,7 +299,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/api/v1/religious-believes-stats/inventadadel87",
+          "raw": "{{base_url}}/api/v1/religious-believes-stats/inventadadel87/2000",
           "host": [
             "{{base_url}}"
           ],
@@ -307,7 +307,8 @@
             "api",
             "v1",
             "religious-believes-stats",
-            "inventadadel87"
+            "inventadadel87",
+            "2000"
           ]
         }
       },
