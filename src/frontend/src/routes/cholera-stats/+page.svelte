@@ -105,17 +105,17 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
 
 {#if resultStatus == 200 || resultStatus == 201}
 <div class="alert success">
-  <strong>Status {resultStatus}</strong> — Operación realizada con éxito
+  <strong>EXITO</strong> — Operación realizada con éxito
 </div>
 {/if}
 {#if resultStatus == 400}
 <div class="alert error">
-  <strong>Status {resultStatus}</strong> — Campos sin rellenar
+  <strong>ERROR</strong> — Campos sin rellenar
 </div>
 {/if}
 {#if resultStatus == 409}
 <div class="alert error">
-  <strong>Status {resultStatus}</strong> — La estadística ya existe
+  <strong>ERROR</strong> — La estadística ya existe
 </div>
 {/if}
 
