@@ -162,12 +162,12 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
     </thead>
     <tbody>
         <tr>
-            <td><input type="number" bind:value= {newCountry} /></td>
+            <td><input bind:value= {newCountry} /></td>
             <td><input type="number" bind:value= {newYear} /></td>
             <td><input type="number" bind:value= {newReportedCases} /></td>
             <td><input type="number" bind:value= {newReportedDeaths} /></td>
             <td><input type="number" bind:value= {newFatalityRates} /></td>
-            <td><input type="number" bind:value= {newWhoRegion} /></td>
+            <td><input bind:value= {newWhoRegion} /></td>
             <td><button onclick={InsertCholeraStat}>INSERTAR</button></td>
         </tr>
         {#each cholera_stats as cholera_stat (`${cholera_stat.country}-${cholera_stat.year}`)}
