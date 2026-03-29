@@ -148,6 +148,7 @@
                         <td>{dato.other}</td>
                         <td>{dato.no_religion}</td>
                         <td><button onclick={deleteRow(dato.entity,dato.year)}>Eliminar</button></td>
+                        <td><a href="./religious-believes-stats/{dato.entity}/{dato.year}"><button>Actualizar</button></a></td>
                     </tr>
                     {/each}
                 </tbody>
