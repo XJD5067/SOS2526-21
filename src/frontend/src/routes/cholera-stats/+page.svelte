@@ -41,6 +41,14 @@ if (dev)
         cholera_stats=data;
     }
 
+     async function getInitdata()  {    
+        const res = await fetch(API + '/loadInitialData', {method: "GET"});
+        resultStatus = await res.status;
+        if(resultStatus == 201 || resultStatus == 409)
+            getCholeraStats();
+    }
+
+
     // @ts-ignore
     async function deleteCholeraStat(country, year){
         const res = await fetch(API+'/'+country+'/'+year, {method : "DELETE"});
@@ -113,7 +121,12 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
 
 </script>
 
+<svelte:head>
+  <title>Cholera Stats</title>
+</svelte:head>
+
 <h1>Estadísticas del cólera</h1>  
+
 
 
 {#if resultStatus == 200 || resultStatus == 201}
@@ -160,6 +173,7 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
 
 <br>
 
+<button onclick={getInitdata}> CARGAR DATOS </button>
 <button onclick={deleteCholeraStats}>BORRAR TODO</button>
 
 <br>
@@ -196,16 +210,16 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
     </thead>
     <tbody>
         <tr>
-            <td><input bind:value= {newCountry} /></td>
-            <td><input type="number" bind:value= {newYear} /></td>
-            <td><input type="number" bind:value= {newReportedCases} /></td>
-            <td><input type="number" bind:value= {newReportedDeaths} /></td>
-            <td><input type="number" bind:value= {newFatalityRates} /></td>
-            <td><input bind:value= {newWhoRegion} /></td>
+            <td><input data-testid="countryInput" bind:value= {newCountry} /></td>
+            <td><input data-testid="yearInput" type="number" bind:value= {newYear} /></td>
+            <td><input data-testid="reportedCasesInput" type="number" bind:value= {newReportedCases} /></td>
+            <td><input data-testid="reportedDeathsInput" type="number" bind:value= {newReportedDeaths} /></td>
+            <td><input data-testid="fatalityRateInput" type="number" bind:value= {newFatalityRates} /></td>
+            <td><input data-testid="regionInput" bind:value= {newWhoRegion} /></td>
             <td><button onclick={InsertCholeraStat}>INSERTAR</button></td>
         </tr>
         {#each cholera_stats as cholera_stat (`${cholera_stat.country}-${cholera_stat.year}`)}
-            <tr>
+            <tr data-testid="choleraRow">
                 <td><a href="cholera-stats/{cholera_stat.country}/{cholera_stat.year}">{cholera_stat.country}</a></td>
                 <td>{cholera_stat.year}</td>
                 <td>{cholera_stat.reportedCases} </td>
