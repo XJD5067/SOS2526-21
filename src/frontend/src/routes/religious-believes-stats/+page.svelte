@@ -16,16 +16,16 @@
     let creencias=$state([]);
     let codigo_status=$state(0);
     //INPUT para el POST
-    let newPais=$state("pais");
-    let newCodigo=$state("codigo");
-    let newAno=$state("año");
-    let newCristiano=$state("cristianos");
-    let newJudio=$state("judios");
-    let newMusulman=$state("musulmanes");
-    let newIndu=$state("indues");
-    let newBudista=$state("budistas");
-    let newOtro=$state("otros");
-    let newNoreligion=$state("sin religion");
+    let newPais=$state("WAWA");
+    let newCodigo=$state("WA");
+    let newAno=$state("3000");
+    let newCristiano=$state("100");
+    let newJudio=$state("0");
+    let newMusulman=$state("0");
+    let newIndu=$state("0");
+    let newBudista=$state("0");
+    let newOtro=$state("0");
+    let newNoreligion=$state("0");
 
     //INPUT FILTROS
     let filtroPais=$state("");
@@ -85,7 +85,12 @@
     }
 
 
-
+    async function getDatosIniciales(){
+        let res=await fetch(BASE_API+"/loadInitialData",{method: 'GET'}); 
+        codigo_status=res.status;
+        if (codigo_status==201) getCreencias();
+        
+    }
 
 
 
@@ -147,22 +152,25 @@
 <div>
     <button onclick={getCreencias}>Actualizar Lista de Datos</button>
 </div>
+<div>
+    <button  onclick={getDatosIniciales}>Cargar datos Iniciales</button>
+</div>
 
 <div>
     <h2>Estadísticas de creencias disponibles</h2>
     <div>
         <h3>Filtros de Búsqueda</h3>
         <div>
-            <input placeholder="país" bind:value={filtroPais}>
-            <input placeholder="código" bind:value={filtroCodigo}>
-            <input placeholder="año" bind:value={filtroAno}>
-            <input placeholder="%Cristianos" bind:value={filtroCristiano}>
-            <input placeholder="%Judíos" bind:value={filtroJudio}>
-            <input placeholder="%Musulmanes" bind:value={filtroMusulman}>
-            <input placeholder="%Indúes" bind:value={filtroIndu}>
-            <input placeholder="%Budistas" bind:value={filtroBudista}>
-            <input placeholder="%Otra Religión" bind:value={filtroOtro}>
-            <input placeholder="%Sin religión" bind:value={filtroNoreligion}>
+            <input data-testid="input-pais" placeholder="país" bind:value={filtroPais}>
+            <input data-testid="input-codigo" placeholder="código" bind:value={filtroCodigo}>
+            <input data-testid="input-ano" placeholder="año" bind:value={filtroAno}>
+            <input data-testid="input-cristiano" placeholder="%Cristianos" bind:value={filtroCristiano}>
+            <input data-testid="input-judio" placeholder="%Judíos" bind:value={filtroJudio}>
+            <input data-testid="input-musulman" placeholder="%Musulmanes" bind:value={filtroMusulman}>
+            <input data-testid="input-indu" placeholder="%Indúes" bind:value={filtroIndu}>
+            <input data-testid="input-budista" placeholder="%Budistas" bind:value={filtroBudista}>
+            <input data-testid="input-otro" placeholder="%Otra Religión" bind:value={filtroOtro}>
+            <input data-testid="input-no-religion" placeholder="%Sin religión" bind:value={filtroNoreligion}>
             <button onclick={getCreenciasFiltro}>Buscar</button>
         </div>
     </div>
@@ -207,7 +215,7 @@
                     </tr>
 
                      {#each creencias as dato}
-                    <tr>
+                    <tr data-testid="creencia-row">
                         <td>{dato.entity}</td>
                         <td>{dato.code}</td>
                         <td>{dato.year}</td> 
@@ -218,7 +226,7 @@
                         <td>{dato.budhist}</td>
                         <td>{dato.other}</td>
                         <td>{dato.no_religion}</td>
-                        <td><button onclick={deleteRow(dato.entity,dato.year)}>Eliminar</button></td>
+                        <td><button data-testid="borrar-{dato.entity}-{dato.year}" onclick={() => deleteRow(dato.entity, dato.year)}>Eliminar</button></td>
                         <td><a href="./religious-believes-stats/{dato.entity}/{dato.year}"><button>Actualizar</button></a></td>
                     </tr>
                     {/each}
