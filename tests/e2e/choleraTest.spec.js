@@ -14,6 +14,9 @@ test('Load initial data of cholera stats', async ({ page }) => {
     await page.waitForSelector('[data-testid="choleraRow"]');
     const choleraCount= await page.getByTestId('choleraRow').count();
     expect(choleraCount).toBeGreaterThan(0);
+
+    //borro todo para no tener que buscar la row que cree nueva en el siguiente test y solo halla una row
+    await page.getByRole('button', {name: 'BORRAR TODO'}).click();
 }); 
 
 
@@ -43,8 +46,12 @@ test('Create one cholera stat', async ({ page }) => {
     .toHaveCount(choleraCount + 1);
 
 
-    await expect(page.getByText('PaisPrueba')).toBeVisible();
+    await expect(page.getByText('PaisPrueba', { exact: true })).toBeVisible();
     await expect(page.getByText('3000', { exact: true })).toBeVisible();
+    await expect(page.getByText('2', { exact: true })).toBeVisible();
+    await expect(page.getByText('1', { exact: true })).toBeVisible();
+    await expect(page.getByText('0.5', { exact: true })).toBeVisible();
+    await expect(page.getByText('Region prueba', { exact: true })).toBeVisible();
 
 }); 
 
@@ -69,7 +76,7 @@ test('filter cholera stats', async ({ page }) => {
 
     expect(choleraCount).toBe(1);
 
-    await expect(page.getByText('PaisPrueba')).toBeVisible();
+    await expect(page.getByText('PaisPrueba', { exact: true })).toBeVisible();
     await expect(page.getByText('3000', { exact: true })).toBeVisible();
     
 }); 
@@ -102,7 +109,6 @@ test('Edit one cholera stat', async ({ page }) => {
 
 
 
-//ARREGLAR IDENTIFICADOR NO FUNCIONA
 test('Delete one cholera stat', async ({ page }) => {
     await page.goto(app);
     await page.hover('.dropdown');
@@ -120,8 +126,6 @@ test('Delete all cholera stats', async ({ page }) => {
     await page.hover('.dropdown');
     await page.getByRole('link', {name: 'Cholera'}).click();
     await page.getByRole('button', {name: 'BORRAR TODO'}).click();
-    //espera a que almenos cargue una fila por que tengo demasiadas filas y no espera a que carguen para contar
-    //await page.waitForSelector('[data-testid="choleraRow"]');
     const choleraCount= await page.getByTestId('choleraRow').count();
     expect(choleraCount).toBe(0);
 }); 

@@ -171,6 +171,7 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
   }
 </style>
 
+
 <h5>Haga click en el país para actualizar datos de la estadística</h5>
 
 <br>
@@ -236,9 +237,13 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
     </tbody>
 </table>
 
+
+
+<!-- 
 {#if cholera_stats.length==0}
     <p ></p>
     <div class="alert empty">
     <strong>¡VAYA!</strong> — No se encontraron estadisticas con esos campos.
     </div>
 {/if}
+-->
