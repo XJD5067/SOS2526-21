@@ -35,7 +35,7 @@ export function loadBackendApiMTC(app){
                 fs.createReadStream("./data/cholera_stats.csv")
                 .pipe(csv()) //lee primera linea de cabezera (asociación clave:valor)
                 .on("data",(row)=> {
-                    if(csvData.length < 20){
+                    if(csvData.length < 20){ //carga solo 20 filas
                     csvData.push({  // "data" -> evento por cada una nueva fila
                     country: row["Country"],
                     year: parseInt(row["Year"]),
@@ -125,7 +125,7 @@ export function loadBackendApiMTC(app){
 
                     //paginacion
                     const limit = parseInt(req.query.limit) || chol_st.length;
-                    const offset = parseInt(req.query.offset) || 0;
+                    const offset = parseInt(req.query.offset) ?? 0;
                     chol_st = chol_st.slice(offset, offset + limit);
 
                 res.status(200).send(JSON.stringify(chol_st, null, 2));

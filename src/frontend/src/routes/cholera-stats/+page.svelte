@@ -19,9 +19,7 @@ let filterReportedDeaths = $state('');
 let filterFatalityRate = $state('');
 let filterFrom = $state('');
 let filterTo = $state('');
-
-
-
+let filterOffset=$state(0)  ;
 let API = "/api/v1/cholera-stats";
 
 if (dev)
@@ -30,14 +28,17 @@ if (dev)
     // @ts-ignore
     async function getCholeraStats()  {
         let url = API + '?';
+    
         if(filterCountry) url += `country=${filterCountry}&`;
-        if(filterYear)    url += `year=${filterYear}&`;
-        if(filterRegion)  url += `region=${filterRegion}&`;
-        if(filterReportedCases)  url += `reportedCases=${filterReportedCases}&`;
-        if(filterReportedDeaths)  url += `reportedDeaths=${filterReportedDeaths}&`;
-        if(filterFatalityRate)  url += `fatalityRate=${filterFatalityRate}&`;
-        if(filterFrom)    url += `from=${filterFrom}&`;
-        if(filterTo)      url += `to=${filterTo}&`;
+        if(filterYear) url += `year=${filterYear}&`;
+        if(filterRegion) url += `region=${filterRegion}&`;
+        if(filterReportedCases) url += `reportedCases=${filterReportedCases}&`;
+        if(filterReportedDeaths) url += `reportedDeaths=${filterReportedDeaths}&`;
+        if(filterFatalityRate) url += `fatalityRate=${filterFatalityRate}&`;
+        if(filterFrom) url += `from=${filterFrom}&`;
+        if(filterTo) url += `to=${filterTo}&`;
+        url += `offset=${filterOffset}&`;
+        url += `limit=${LIMIT}&`;
         const res = await fetch(url, {method: "GET"});
         const data = await res.json();
         cholera_stats=data;
@@ -119,7 +120,20 @@ if (dev)
 
 
 
-onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
+    onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
+
+
+    const LIMIT = 10;
+
+    async function incrementaOffset(){
+        filterOffset += LIMIT;
+        getCholeraStats();
+    }
+
+    async function decrementaOffset(){
+        if(filterOffset >= LIMIT) filterOffset -= LIMIT;
+        getCholeraStats();
+    }
 
 </script>
 
@@ -202,6 +216,11 @@ onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
 <br>
 <br>
 <h3>CREACIÓN DE ESTADISTICA</h3>
+
+<div>
+        <button onclick={decrementaOffset}>Anterior</button>
+        <button onclick={incrementaOffset}>Siguiente</button>
+</div>
 <table>
     <thead>
         <tr>
