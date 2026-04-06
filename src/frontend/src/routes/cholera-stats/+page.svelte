@@ -117,7 +117,6 @@ if (dev)
         
     }
 
-//push
 
 
 onMount(async () =>  {getCholeraStats(); }); //que se carga al iniciar la pagina
