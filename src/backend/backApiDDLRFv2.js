@@ -2,7 +2,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import dataStore from 'nedb';
 import {verifyToken} from './auth.js';
-let db = new dataStore({ filename: './data/db/aids-deaths-stats.db', autoload: true });
+let db = new dataStore({ filename: './data/db/aids-deaths-stats-v2.db', autoload: true });
 let BASE_URL_API = "/api/v2";
 let DOC_URL = "https://documenter.getpostman.com/view/52383803/2sBXiesEAR";
 
