@@ -1,3 +1,4 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/gti-sos/SOS2526-21/badge.svg)](https://snyk.io/test/github/gti-sos/SOS2526-21)
 ## SOS2526-21
 
 - **Team**
