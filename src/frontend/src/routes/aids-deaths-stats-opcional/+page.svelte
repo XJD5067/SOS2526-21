@@ -1,6 +1,7 @@
 <script>
 	import { dev } from '$app/environment';
 	import { onMount } from 'svelte';
+	import { createAuth0Client } from '@auth0/auth0-spa-js';
 	// @ts-ignore
 	let datos = $state([]);
 	let BASE_API = '/api/v2/aids-deaths-stats';
@@ -10,6 +11,13 @@
 	let loginUsername = $state('');
 	let loginPassword = $state('');
 	let loggedIn = $state(false);
+
+	let auth0Client = null;
+	let auth0LoggedIn = $state(false);
+	let auth0User = $state(null);
+
+	const AUTH0_DOMAIN = 'sos2526-21.eu.auth0.com';
+	const AUTH0_CLIENT_ID = 'A0G65pEpCCbUHqnhBFt03WXPdyuk9uOA';
 
 	let newCountry = $state('');
 	let newCodeCountry = $state('');
@@ -192,6 +200,7 @@
 	}
 
 	onMount(async () => {
+		// Token de GitHub OAuth
 		const params = new URLSearchParams(window.location.search);
 		const oauthToken = params.get('token');
 		if (oauthToken) {
@@ -200,8 +209,44 @@
 		}
 		token = localStorage.getItem('token') ?? '';
 		loggedIn = token !== '';
+
+		// Inicializar Auth0
+		auth0Client = await createAuth0Client({
+			domain: AUTH0_DOMAIN,
+			clientId: AUTH0_CLIENT_ID,
+			authorizationParams: {
+				redirect_uri: window.location.origin + '/aids-deaths-stats-opcional'
+			}
+		});
+
+		// Manejar callback de Auth0
+		if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+			await auth0Client.handleRedirectCallback();
+			window.history.replaceState({}, '', window.location.pathname);
+		}
+
+		auth0LoggedIn = await auth0Client.isAuthenticated();
+		if (auth0LoggedIn) {
+			auth0User = await auth0Client.getUser();
+		}
+
 		await getDatos();
 	});
+
+	async function loginAuth0() {
+    	await auth0Client.loginWithRedirect();
+	}
+
+	async function logoutAuth0() {
+    auth0LoggedIn = false;
+    auth0User = null;
+    await auth0Client.logout({
+        logoutParams: { returnTo: window.location.origin + '/aids-deaths-stats' }
+    });
+}
+
+
+	
 </script>
 
 <svelte:head>
@@ -233,8 +278,19 @@
 				<button class="btn btn-primary" onclick={login}>🔐 Iniciar sesión</button>
 			</div>
 			<a href="/api/v2/auth/github" class="btn btn-secondary">
-    			🐙 Iniciar sesión con GitHub	
+    		 	Iniciar sesión con GitHub	
 			</a>
+			<button class="btn btn-secondary" onclick={loginAuth0}>
+			    🔐 Iniciar sesión con Auth0
+			</button>
+			{#if auth0LoggedIn}
+				<div style="display:flex; align-items:center; gap:1rem; margin-top:0.5rem;">
+					<span style="color:#16a34a; font-weight:600;">
+						✔ Auth0: <strong>{auth0User?.name ?? auth0User?.email}</strong>
+					</span>
+					<button class="btn btn-ghost" onclick={logoutAuth0}>Cerrar sesión Auth0</button>
+				</div>
+			{/if}
 		{:else}
 			<div style="display:flex; align-items:center; gap:1rem;">
 				<span style="color:#16a34a; font-weight:600;">✔ Sesión iniciada como <strong>admin</strong></span>
