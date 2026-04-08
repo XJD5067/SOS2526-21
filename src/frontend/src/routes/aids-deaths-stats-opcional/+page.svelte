@@ -238,10 +238,10 @@
 	}
 
 	async function logoutAuth0() {
-    auth0LoggedIn = false;
-    auth0User = null;
-    await auth0Client.logout({
-        logoutParams: { returnTo: window.location.origin + '/aids-deaths-stats' }
+		auth0LoggedIn = false;
+		auth0User = null;
+		await auth0Client.logout({
+			logoutParams: { returnTo: window.location.origin + '/aids-deaths-stats-opcional' }
     });
 }
 
