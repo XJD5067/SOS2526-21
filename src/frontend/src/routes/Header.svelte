@@ -14,7 +14,7 @@
         <a href="/religious-believes-stats">Religious Believes</a>
         <a href="/aids-deaths-stats">AIDS Deaths</a>
         <a href="/aids-deaths-stats-opcional">AIDS Deaths Opcional</a>
-        <a href="/react"> AIDS Deaths react </a>
+        <a href="/react/aidsDeath"> AIDS Deaths react </a>
         <a href="/cholera-stats">Cholera</a>
         <a href="/cholera-stats-optional">Cholera Opcional</a>
         <a href="/react/cholera"> Cholera react </a>

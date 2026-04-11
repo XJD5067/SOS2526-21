@@ -101,7 +101,7 @@ export default function AidsDeathsStats() {
               <td>{d.death_count_hiv_aids_50_69}</td>
               <td>
                 <button onClick={() => del(d.codecountry, d.year)}>Borrar</button>{" "}
-                <button onClick={() => window.location.href = `/react/${d.codecountry}/${d.year}`}>Editar</button>
+                <button onClick={() => window.location.href = `/react/aidsDeath/${d.codecountry}/${d.year}`}>Editar</button>
               </td>
             </tr>
           ))}

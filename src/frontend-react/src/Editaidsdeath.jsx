@@ -47,7 +47,7 @@ export default function EditAidsDeath({ codecountry, year }) {
 
   return (
     <div style={{ padding: 16, fontFamily: "sans-serif" }}>
-      <button onClick={() => window.location.href = '/react'}>← Volver</button>
+      <button onClick={() => window.location.href = '/react/aidsDeath/'}>← Volver</button>
       <h1>Editar registro — {codecountry} / {year}</h1>
 
       <p>
@@ -90,7 +90,7 @@ export default function EditAidsDeath({ codecountry, year }) {
       </p>
 
       <button onClick={guardar}>Guardar cambios</button>{" "}
-      <button onClick={() => window.location.href = '/react'}>Cancelar</button>
+      <button onClick={() => window.location.href = '/react/aidsDeath/'}>Cancelar</button>
 
       {/* CÓDIGOS DE ESTADO */}
       <hr />
