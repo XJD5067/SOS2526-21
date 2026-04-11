@@ -71,6 +71,11 @@ app.get('/react/{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, 'src/frontend-react/dist/index.html'))
 })
 
+app.get('/react/{*path}', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/frontend-react/dist/index.html'))
+})
+
+
 app.use(handler)
 
 app.listen(PORT, () => {

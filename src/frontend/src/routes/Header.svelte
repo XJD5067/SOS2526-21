@@ -17,6 +17,7 @@
         <a href="/react"> AIDS Deaths react </a>
         <a href="/cholera-stats">Cholera</a>
         <a href="/cholera-stats-optional">Cholera Opcional</a>
+        <a href="/react/cholera"> Cholera react </a>
 
       </div>
     </div>
