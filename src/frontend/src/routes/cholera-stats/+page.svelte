@@ -179,11 +179,6 @@ if (dev)
     color: #721c24;
     border: 1px solid #f5c6cb;
   }
-  .empty {
-    background-color: #d7dbf8;
-    color: #143b88;
-    border: 1px solid #d7dbf8;
-  }
 </style>
 
 

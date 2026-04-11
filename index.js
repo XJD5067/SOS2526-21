@@ -9,7 +9,12 @@ import { createServer } from 'vite'
 
 import { loadOAuthDDLRF } from './src/backend/oauthDDLRF.js';
 
+
+
 import {loadBackendApiMTC} from './src/backend/backApiMTC.js'
+//opcionales maria
+import { loadBackendApiMTCv2 } from './src/backend/backApiMTCv2.js';
+import { loadOAuthMTC } from './src/backend/oauthMTC.js';
 
 import { loadBackendApiIAD } from './src/backend/backApiIAD.js'
 
@@ -42,7 +47,15 @@ loadBackendApiDDLRFv2(app)
 //MARIA
 //-------
 
+
+loadOAuthMTC(app)
+
 loadBackendApiMTC(app)
+
+loadBackendApiMTCv2(app)
+
+
+
 
 //--------------------------------------------------------------------------------------------------
 //IVÁN
